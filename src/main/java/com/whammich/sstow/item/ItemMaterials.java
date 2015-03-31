@@ -15,7 +15,7 @@ import java.util.List;
 
 public class ItemMaterials extends Item {
 
-    private static String[] names = { "nugget.iron", "nugget.soulium", "ingot.soulium", "dust.vile", "essence.corrupted", "petrified.stick" };
+    private static String[] names = { "nugget.iron", "nugget.soulium", "ingot.soulium", "dust.vile", "essence.corrupted", "petrified.stick", "obsidan.shard" };
     private IIcon[] icon = new IIcon[16];
 
     public ItemMaterials() {
@@ -44,6 +44,7 @@ public class ItemMaterials extends Item {
         this.icon[3] = iconRegister.registerIcon(Reference.MOD_ID + ":dustVile");
         this.icon[4] = iconRegister.registerIcon(Reference.MOD_ID + ":essenceCorrupted");
         this.icon[5] = iconRegister.registerIcon(Reference.MOD_ID + ":stickPetrified");
+        this.icon[6] = iconRegister.registerIcon(Reference.MOD_ID + ":shardObsidain");
     }
 
     @SuppressWarnings({"rawtypes", "unchecked"})

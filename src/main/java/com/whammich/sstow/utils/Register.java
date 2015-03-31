@@ -22,6 +22,16 @@ import com.whammich.sstow.block.BlockSoulium;
 import com.whammich.sstow.block.BlockXenolith;
 import com.whammich.sstow.enchantment.EnchantmentSoulStealer;
 import com.whammich.sstow.guihandler.GuiHandler;
+import com.whammich.sstow.item.ItemClubPetr;
+import com.whammich.sstow.item.ItemClubIron;
+import com.whammich.sstow.item.ItemClubSoul;
+import com.whammich.sstow.item.ItemClubXogu;
+import com.whammich.sstow.item.ItemClubDeco;
+import com.whammich.sstow.item.ItemMacuPetr;
+import com.whammich.sstow.item.ItemMacuIron;
+import com.whammich.sstow.item.ItemMacuSoul;
+import com.whammich.sstow.item.ItemMacuXogu;
+import com.whammich.sstow.item.ItemMacuDeco;
 import com.whammich.sstow.item.ItemAxeSoul;
 import com.whammich.sstow.item.ItemHoeSoul;
 import com.whammich.sstow.item.ItemMaterials;
@@ -46,6 +56,9 @@ import cpw.mods.fml.common.registry.GameRegistry;
 public class Register {
 	// Tool material for the soul tools/sword
 	public static ToolMaterial SOULIUM = EnumHelper.addToolMaterial("SOULIUM", 3, 3122, 12.0F, 6F, 30);
+	public static ToolMaterial MACU1 = EnumHelper.addToolMaterial("MACU1", 3, 10, 14.0F, 6F, 30);
+	public static ToolMaterial MACU2 = EnumHelper.addToolMaterial("MACU2", 3, 20, 15.0F, 6F, 30);
+	public static ToolMaterial MACU3 = EnumHelper.addToolMaterial("MACU3", 3, 40, 16.0F, 6F, 30);
 
 	// Setting up the enchantment details from the config
 	public static Enchantment SOUL_STEALER = new EnchantmentSoulStealer(Config.ENCHANT_ID, Config.ENCHANT_WEIGHT);
@@ -58,6 +71,16 @@ public class Register {
 	public static Item ItemMaterials = new ItemMaterials();
 	public static Item ItemFixedDummy = new ItemfixedAchievement();
 	public static Item ItemShardSoul = new ItemShardSoul();
+	public static Item ItemClubDeco = new ItemClubDeco(ToolMaterial.WOOD);
+	public static Item ItemClubPetr = new ItemClubPetr(ToolMaterial.STONE);
+	public static Item ItemClubIron = new ItemClubIron(ToolMaterial.IRON);
+	public static Item ItemClubSoul = new ItemClubSoul(SOULIUM);
+	public static Item ItemClubXogu = new ItemClubXogu(SOULIUM);
+	public static Item ItemMacuDeco = new ItemMacuDeco(ToolMaterial.WOOD);
+	public static Item ItemMacuPetr = new ItemMacuPetr(MACU1);
+	public static Item ItemMacuIron = new ItemMacuIron(MACU2);
+	public static Item ItemMacuSoul = new ItemMacuSoul(MACU3);
+	public static Item ItemMacuXogu = new ItemMacuXogu(MACU3);
 	public static Item ItemSwordSoul = new ItemSwordSoul(SOULIUM);
 	public static Item ItemPickaxeSoul = new ItemPickaxeSoul(SOULIUM);
 	public static Item ItemAxeSoul = new ItemAxeSoul(SOULIUM);
@@ -90,6 +113,16 @@ public class Register {
 
 		GameRegistry.registerItem(ItemModules, "ItemModulesSoul");
 		GameRegistry.registerItem(ItemMaterials, "ItemMaterialsSoul");
+		GameRegistry.registerItem(ItemClubPetr, "ItemClubPetr");
+		GameRegistry.registerItem(ItemClubIron, "ItemClubIron");
+		GameRegistry.registerItem(ItemClubSoul, "ItemClubSoul");
+		GameRegistry.registerItem(ItemClubXogu, "ItemClubXogu");
+		GameRegistry.registerItem(ItemClubDeco, "ItemClubDeco");
+		GameRegistry.registerItem(ItemMacuPetr, "ItemMacuPetr");
+		GameRegistry.registerItem(ItemMacuIron, "ItemMacuIron");
+		GameRegistry.registerItem(ItemMacuSoul, "ItemMacuSoul");
+		GameRegistry.registerItem(ItemMacuXogu, "ItemMacuXogu");
+		GameRegistry.registerItem(ItemMacuDeco, "ItemMacuDeco");
 		GameRegistry.registerItem(ItemSwordSoul, "ItemSwordSoul");
 		GameRegistry.registerItem(ItemPickaxeSoul, "ItemPickaxeSoul");
 		GameRegistry.registerItem(ItemAxeSoul, "ItemAxeSoul");
