@@ -24,6 +24,6 @@ public class ItemMacuSoul extends ItemSword {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {
-		itemIcon = iconRegister.registerIcon(Reference.MOD_ID + ":soliummacu");
+		itemIcon = iconRegister.registerIcon(Reference.MOD_ID + ":souliummacu");
 	}
 }
