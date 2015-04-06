@@ -25,3 +25,4 @@
 # Specific files
 Thumbs.db
 curse.gradle
+*.log

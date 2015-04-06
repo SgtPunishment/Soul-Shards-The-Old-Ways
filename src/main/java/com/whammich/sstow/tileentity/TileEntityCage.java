@@ -200,7 +200,7 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 
 		if (((Config.MODULE_RED == false) && (TierHandler.getChecksRedstone(tier - 1))
 				&& (redstoneActive == Config.INVERT_REDSTONE)) || 
-				((Config.MODULE_RED == true) && (modules[1] != null))) {
+				((Config.MODULE_RED == true) && (modules[1] != null) && (redstoneActive == Config.INVERT_REDSTONE))) {
 			return false;
 		}
 
