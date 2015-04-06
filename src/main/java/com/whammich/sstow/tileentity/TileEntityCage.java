@@ -36,6 +36,7 @@ import com.whammich.sstow.utils.EntityBlackList;
 public class TileEntityCage extends TileEntity implements ISidedInventory {
 
 	private ItemStack inventory;
+	private ItemStack[] modules;
 	private int counter;
 	private int updateCounter;
 	private int tier;
@@ -197,8 +198,9 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 			return false;
 		}
 
-		if ((TierHandler.getChecksRedstone(tier - 1))
-				&& (redstoneActive == Config.INVERT_REDSTONE)) {
+		if (((Config.MODULE_RED == false) && (TierHandler.getChecksRedstone(tier - 1))
+				&& (redstoneActive == Config.INVERT_REDSTONE)) || 
+				((Config.MODULE_RED == true) && (modules[1] != null))) {
 			return false;
 		}
 

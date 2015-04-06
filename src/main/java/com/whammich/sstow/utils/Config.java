@@ -24,6 +24,7 @@ public final class Config {
 	public static boolean ENABLE_FLOOD_PREVENTION;
 	public static boolean ENABLE_DEBUG;
 	public static boolean EASYMODE;
+	public static boolean MODULE_RED;
 	// recipes Section
 	public static int COOK_TIME;
 	public static int SHARDS;
@@ -135,6 +136,8 @@ public final class Config {
 			EASYMODE = config
 					.getBoolean("Enable Easy mode", "general", false,
 							"RESTART REQUIRED: This will revert the shard creation to the structure method");
+			MODULE_RED = config.getBoolean("Enable Redstone Module", "general", true,
+					"wub wub");
 			// recipes Section
 			COOK_TIME = config
 					.getInt("Cooking Time", "recipes", 12800, 0, 999999,
