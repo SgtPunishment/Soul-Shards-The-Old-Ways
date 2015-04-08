@@ -25,6 +25,9 @@ public final class Config {
 	public static boolean ENABLE_DEBUG;
 	public static boolean EASYMODE;
 	public static boolean MODULE_RED;
+	public static boolean MODULE_LIGHT
+	public static boolean MODULE_DIM
+	public static boolean MODULE_PLAYER
 	// recipes Section
 	public static int COOK_TIME;
 	public static int SHARDS;
@@ -138,6 +141,10 @@ public final class Config {
 							"RESTART REQUIRED: This will revert the shard creation to the structure method");
 			MODULE_RED = config.getBoolean("Enable Redstone Module", "general", true,
 					"wub wub");
+			MODULE_LIGHT = config.getBoolean("Enable Light Module", "general", true,
+					"wub wub");
+			MODULE_DIM = config.getBoolean("Enable Dimention Moduel", "general", true, "wub wub");
+			MODULE_PLAYER = config.getBoolean("Enable Player Module","general", false, "wub wub");
 			// recipes Section
 			COOK_TIME = config
 					.getInt("Cooking Time", "recipes", 12800, 0, 999999,

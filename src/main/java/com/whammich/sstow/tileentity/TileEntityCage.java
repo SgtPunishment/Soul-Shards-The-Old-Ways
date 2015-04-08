@@ -200,20 +200,20 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 
 		if (((Config.MODULE_RED == false) && (TierHandler.getChecksRedstone(tier - 1))
 				&& (redstoneActive == Config.INVERT_REDSTONE)) || 
-				((Config.MODULE_RED == true) && (modules[1] != null) && (redstoneActive == Config.INVERT_REDSTONE))) {
+				((Config.MODULE_RED == true) && (modules[0] != null) && (redstoneActive == Config.INVERT_REDSTONE))) {
 			return false;
 		}
 
-		if ((TierHandler.getChecksPlayer(tier - 1))
-				&& (!isPlayerClose(this.xCoord, this.yCoord, this.zCoord))) {
+		if (((Config.MODULE_PLAYER == false) && (TierHandler.getChecksPlayer(tier - 1))
+				&& (!isPlayerClose(this.xCoord, this.yCoord, this.zCoord))) || ((Config.MODULE_PLAYER == true) && (!isPlayerClose(this.xCoord, this.yCoord, this.zCoord)) && (modules[3] != null))) {
 			return false;
 		}
 
-		if ((TierHandler.getChecksLight(tier - 1)) && (!canSpawnInLight(ent))) {
+		if (((Config.MODULE_LIGHT == false) && (TierHandler.getChecksLight(tier - 1)) && (!canSpawnInLight(ent))) || ((Config.MODULE_LIGHT == true) && (!canSpawnInLight(ent)) && (modules[1] != null))) {
 			return false;
 		}
 
-		if ((TierHandler.getChecksWorld(tier - 1)) && (!canSpawnInWorld(ent))) {
+		if (((Config.MODULE_DIM == false) && (TierHandler.getChecksWorld(tier - 1)) && (!canSpawnInWorld(ent))) || ((Config.MODULE_DIM == true) && (!canSpawnInWorld(ent)) && (modules[2] != null))) {
 			return false;
 		}
 		return true;

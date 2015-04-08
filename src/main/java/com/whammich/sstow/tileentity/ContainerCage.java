@@ -12,10 +12,10 @@ import net.minecraft.item.ItemStack;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class CageForge extends Container {
+public class ContainerCage extends Container {
 	private TileEntityCage tileCage;
 
-	public CageForge(InventoryPlayer player, TileEntityCage tileEntityCage) {
+	public ContainerCage(InventoryPlayer player, TileEntityCage tileEntityCage) {
 		this.tileCage = tileEntityCage;
 		this.addSlotToContainer(new Slot(tileEntityCage, 0, 56, 17));
 		this.addSlotToContainer(new Slot(tileEntityCage, 1, 56, 53));
