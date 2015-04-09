@@ -15,8 +15,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemClubXogu extends ItemSword {
 
-	private IIcon[] icon;
-
 	public ItemClubXogu(ToolMaterial Material) {
 		super(Material);
 		this.setCreativeTab(Register.CREATIVE_TAB);
@@ -28,13 +26,7 @@ public class ItemClubXogu extends ItemSword {
 	}
 	
     @SideOnly(Side.CLIENT)
-    public IIcon onItemRightclick() {
-        return this.icon[1];
-    }
-
-    @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister iconRegister) {
-        this.icon[0] = iconRegister.registerIcon(Reference.MOD_ID + ":xogueclub");
-        this.icon[1] = iconRegister.registerIcon(Reference.MOD_ID + ":xogueclub1");
+        itemIcon = iconRegister.registerIcon(Reference.MOD_ID + ":xogueclub");
     }
 }

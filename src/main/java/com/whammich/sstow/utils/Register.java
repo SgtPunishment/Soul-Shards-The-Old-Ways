@@ -179,7 +179,20 @@ public class Register {
 		GameRegistry.addShapelessRecipe(new ItemStack(BlockPetrifiedPlanks, 4, 3), new ItemStack(BlockPetrified, 1, 3));
 		GameRegistry.addShapelessRecipe(new ItemStack(BlockPetrifiedPlanks, 4, 4), new ItemStack(BlockPetrified2, 1, 0));
 		GameRegistry.addShapelessRecipe(new ItemStack(BlockPetrifiedPlanks, 4, 5), new ItemStack(BlockPetrified2, 1, 1));
-
+		/*macuahuitl based recipes */
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemClubPetr), "A", "A", "B", 'A', "BlockPetrifiedPlanks", 'B', "stickPetrified"));
+		GameRegistry.addShapelessRecipe(new ItemStack(ItemMacuPetr), new ItemStack(ItemMaterials,8,6), new ItemStack(ItemClubPetr));
+		GameRegistry.addShapelessRecipe(new ItemStack(ItemClubIron), new ItemStack(ItemMaterials,4,2), new ItemStack(ItemClubPetr));
+		GameRegistry.addShapelessRecipe(new ItemStack(ItemMacuIron), new ItemStack(ItemMaterials,4,2), new ItemStack(ItemMacuPetr));
+		GameRegistry.addShapelessRecipe(new ItemStack(ItemMacuIron), new ItemStack(ItemMaterials,8,6), new ItemStack(ItemClubIron));
+		GameRegistry.addShapelessRecipe(new ItemStack(ItemClubSoul), new ItemStack(ItemMaterials,4,2), new ItemStack(ItemClubIron));
+		GameRegistry.addShapelessRecipe(new ItemStack(ItemMacuSoul), new ItemStack(ItemMaterials,4,2), new ItemStack(ItemMacuIron));
+		GameRegistry.addShapelessRecipe(new ItemStack(ItemMacuSoul), new ItemStack(ItemMaterials,8,6), new ItemStack(ItemClubSoul));
+		GameRegistry.addShapelessRecipe(new ItemStack(ItemClubXogu), new ItemStack(Items.dye,  4,  5), new ItemStack(ItemClubSoul));
+		GameRegistry.addShapelessRecipe(new ItemStack(ItemMacuXogu), new ItemStack(Items.dye,  4,  5), new ItemStack(ItemMacuSoul));
+		GameRegistry.addShapelessRecipe(new ItemStack(ItemMacuXogu), new ItemStack(ItemMaterials,8,6), new ItemStack(ItemClubXogu));
+		
+		
 		
 		if (Loader.isModLoaded("Natura")) {
 			GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ItemMaterials, 2, 3), Blocks.soul_sand, "dustGlowstone"));

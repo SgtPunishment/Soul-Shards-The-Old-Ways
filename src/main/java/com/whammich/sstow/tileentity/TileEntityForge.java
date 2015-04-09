@@ -29,6 +29,17 @@ public class TileEntityForge extends TileEntity implements ISidedInventory {
 	public int currentBurnTime;
 	public int furnaceCookTime;
 
+	@Override
+	public ItemStack getStackInSlotOnClosing(int slot) {
+		if (this.furnaceItemStacks != null) {
+			ItemStack itemstack = this.furnaceItemStacks[slot];
+			this.furnaceItemStacks[slot] = null;
+			return itemstack;
+		} else {
+			return null;
+		}
+	}
+
 	private String furnaceName;
 
 	public void furnaceName(String string) {
@@ -60,17 +71,6 @@ public class TileEntityForge extends TileEntity implements ISidedInventory {
 				}
 				return itemstack;
 			}
-		} else {
-			return null;
-		}
-	}
-
-	@Override
-	public ItemStack getStackInSlotOnClosing(int slot) {
-		if (this.furnaceItemStacks != null) {
-			ItemStack itemstack = this.furnaceItemStacks[slot];
-			this.furnaceItemStacks[slot] = null;
-			return itemstack;
 		} else {
 			return null;
 		}

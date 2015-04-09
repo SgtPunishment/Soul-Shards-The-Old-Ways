@@ -25,9 +25,9 @@ public final class Config {
 	public static boolean ENABLE_DEBUG;
 	public static boolean EASYMODE;
 	public static boolean MODULE_RED;
-	public static boolean MODULE_LIGHT
-	public static boolean MODULE_DIM
-	public static boolean MODULE_PLAYER
+	public static boolean MODULE_LIGHT;
+	public static boolean MODULE_DIM;
+	public static boolean MODULE_PLAYER;
 	// recipes Section
 	public static int COOK_TIME;
 	public static int SHARDS;
