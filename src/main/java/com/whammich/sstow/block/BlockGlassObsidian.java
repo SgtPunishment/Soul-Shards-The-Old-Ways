@@ -15,47 +15,30 @@ import net.minecraft.util.Facing;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 
-public class BlockGlassObsidian  extends Block {
+public class BlockGlassObsidian extends Block {
 
 	public BlockGlassObsidian() {
-		super(Material.glass);
-		this.setBlockName("sstow.glassobsidian");
-		this.setCreativeTab(Register.CREATIVE_TAB);
-		this.blockHardness = 1.0F;
-		this.blockResistance = 4.0F;
+		super(Material.rock);
+		setCreativeTab(Register.CREATIVE_TAB);
+		setLightOpacity(255);
+		useNeighborBrightness = true;
+		setHardness(50.0F);
+		setResistance(2000.0F);
+		setBlockName("sstow.block.obsidian.glass");
 	}
 	
     @Override
     public boolean isOpaqueCube()
     {
-        return false;
+        return true;
     }
     
     @Override
     public int getRenderBlockPass()
-{
+	{
             return 1;
-}
+	}
     
-    @SideOnly(Side.CLIENT)
-    public boolean shouldSideBeRendered(IBlockAccess world, int m, int x, int y, int z)
-    {
-        Block block = world.getBlock(m, x, y);
-        {
-            if (world.getBlockMetadata(m, x, y) != world.getBlockMetadata(m - Facing.offsetsXForSide[z], x - Facing.offsetsYForSide[z], y - Facing.offsetsZForSide[z]))
-            {
-                return true;
-            }
-
-            if (block == this)
-            {
-                return false;
-            }
-        }
-        return super.shouldSideBeRendered(world, m, x, y, z);
-    }
-
-
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta) {
@@ -65,6 +48,10 @@ public class BlockGlassObsidian  extends Block {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister iconRegister) {
-		this.blockIcon = iconRegister.registerIcon(Reference.MOD_ID + ":ObsidianGlass");
+		this.blockIcon = iconRegister.registerIcon(Reference.MOD_ID + ":glassObsidian");
+	}
+	@Override
+	public boolean renderAsNormalBlock() {
+		return false;
 	}
 }
