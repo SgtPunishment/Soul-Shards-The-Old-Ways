@@ -35,19 +35,20 @@ import com.whammich.sstow.utils.EntityBlackList;
 
 public class TileEntityCage extends TileEntity implements ISidedInventory {
 
-	private ItemStack inventory;
 	private ItemStack[] modules;
+	private ItemStack inventory;
 	private int counter;
 	private int updateCounter;
 	private int tier;
 	private static final int[] slot = new int[] { 0, 1, 2, 3, 4, 5 };
 
 	private String entName;
+	private String owner;
 	private boolean redstoneActive;
 	private boolean initChecks;
 	private boolean active;
 
-	String Owner;
+	private String cageName;
 
 	public TileEntityCage() {
 		counter = 0;
@@ -57,8 +58,8 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 		active = false;
 	}
 
-	public void addOwner(String playerName) {
-		Owner = playerName;
+	public void cageName(String string) {
+		this.cageName = string;
 	}
 
 	//@SuppressWarnings("rawtypes")
@@ -110,7 +111,7 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 
 		if (counter >= TierHandler.getCooldown(tier - 1) * 20 - 1) {
 			if (Config.ENABLE_DEBUG) {
-				ModLogger.logInfo("Successfully spawned: " + entName);
+				ModLogger.logInfo(Utils.localizeFormatted("chat.sstow.debug.successspawn", "" + entName));
 			}
 
 			EntityLiving[] toSpawn = new EntityLiving[TierHandler
@@ -138,36 +139,6 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 				toSpawn[i].getEntityData().setBoolean("SSTOW", true);
 				toSpawn[i].forceSpawn = true;
 				toSpawn[i].func_110163_bv();
-
-
-//				// if this fails, don't crash the game
-//				try {
-//					// get the main class (like EntityZombie)
-//					Class c = toSpawn[i].getClass();
-//					while (c.getSuperclass() != EntityLiving.class
-//							&& c.getSuperclass() != null) {
-//						c = c.getSuperclass();
-//					}
-//					// set c to the EntityLiving class
-//					c = c.getSuperclass();
-//					// get the private experienceValue field
-//					Field field;
-//					try {
-//						// obfuscated environment(normal game)
-//						field = c.getDeclaredField("field_70728_aV");
-//					} catch (Exception e) {
-//						// System.out.println("couldn't find field, are you in a development environment?");
-//						field = c.getDeclaredField("experienceValue");
-//					}
-//					field.setAccessible(true);
-//					field.setInt(toSpawn[i], 0);
-//				} catch (Exception e) {
-//					// testing output. Should not be necessary anymore
-//					// System.out.println("something went wrong");
-//					// System.out.println(e.getLocalizedMessage()+ " - "+
-//					// e.toString());
-//				}
-
 			}
 			spawnEntities(toSpawn);
 			counter = 0;
@@ -220,7 +191,12 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 	}
 
 	private boolean isPlayerClose(int x, int y, int z) {
-		return worldObj.getClosestPlayer(x, y, z, 16.0D) != null;
+		EntityPlayer entityPlayer = worldObj.getClosestPlayer(x, y, z, 16.0D);
+		if ((Config.PERSONALSHARD && entityPlayer != null  && entityPlayer.getDisplayName().equals(owner)) || (!Config.PERSONALSHARD && entityPlayer != null)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	private boolean canSpawnInWorld(EntityLiving ent) {
@@ -319,6 +295,10 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 		if (inventory != null) {
 			tier = Utils.getShardTier(inventory);
 			entName = Utils.getShardBoundEnt(inventory);
+			owner = Utils.getShardBoundPlayer(inventory);
+		}
+		if (nbt.hasKey("CustomName", 8)) {
+			this.cageName = nbt.getString("CustomName");
 		}
 		active = nbt.getBoolean("active");
 	}
@@ -329,6 +309,9 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 			NBTTagCompound tag = new NBTTagCompound();
 			inventory.writeToNBT(tag);
 			nbt.setTag("Shard", tag);
+		}
+		if (this.hasCustomInventoryName()) {
+			nbt.setString("CustomName", this.cageName);
 		}
 		nbt.setBoolean("active", active);
 	}
@@ -357,11 +340,14 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 
 	public void setInventorySlotContents(int slot, ItemStack stack) {
 		this.inventory = stack;
-
-		this.worldObj.setBlockMetadataWithNotify(this.xCoord, this.yCoord,
-				this.zCoord, 1, 2);
-		this.tier = Utils.getShardTier(this.inventory);
-		this.entName = Utils.getShardBoundEnt(this.inventory);
+		if(this.inventory == null) {
+			return;
+		} else {
+			this.worldObj.setBlockMetadataWithNotify(this.xCoord, this.yCoord, this.zCoord, 1, 2);
+			this.tier = Utils.getShardTier(this.inventory);
+			this.entName = Utils.getShardBoundEnt(this.inventory);
+			this.owner = Utils.getShardBoundPlayer(inventory);
+		}
 	}
 
 	@Override
@@ -371,12 +357,13 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 
 	@Override
 	public String getInventoryName() {
-		return null;
+		return this.hasCustomInventoryName() ? this.cageName
+				: "container.soulcage";
 	}
 
 	@Override
 	public boolean hasCustomInventoryName() {
-		return false;
+		return this.cageName != null && this.cageName.length() > 0;
 	}
 
 	@Override
@@ -410,8 +397,12 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack stack) {
-		return stack != null && stack.getItem() == Register.ItemShardSoul
-				&& Utils.isShardBound(stack) && Utils.getShardTier(stack) > 0;
+		return 
+				 stack != null
+				  && stack.getItem() == Register.ItemShardSoul 
+				  && Utils.isShardBound(stack) 
+				  && Utils.getShardTier(stack) > 0; 
+				 
 	}
 
 	@Override

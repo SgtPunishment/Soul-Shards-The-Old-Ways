@@ -16,7 +16,7 @@ public class CreateShardEvent {
 
 	@SubscribeEvent
 	public void onRightClick(PlayerInteractEvent event) {
-		if (Config.EASYMODE == true) {
+		if (Config.RITUAL == true) {
 
 			if (event.world.isRemote
 					|| event.action != PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK) {

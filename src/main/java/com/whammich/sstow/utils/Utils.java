@@ -64,7 +64,7 @@ public final class Utils {
 				soulStealer *= Config.ENCHANT_KILL_BONUS;
 				Utils.increaseShardKillCount(newShard,
 						(short) (1 + soulStealer));
-//				Utils.checkForAchievements(player, newShard);
+				// Utils.checkForAchievements(player, newShard);
 				player.worldObj.spawnEntityInWorld(new EntityItem(
 						player.worldObj, player.posX, player.posY, player.posZ,
 						newShard));
@@ -76,30 +76,31 @@ public final class Utils {
 		return lastResort;
 	}
 
-//	public static void checkForAchievements(EntityPlayer player, ItemStack shard) {
-//		int tier = (int) getShardTier(shard);
-//		switch (tier) {
-//		case 0:
-//			break;
-//		case 1:
-//			player.addStat(Achievements.shardt1, 1);
-//			break;
-//		case 2:
-//			player.addStat(Achievements.shardt2, 1);
-//			break;
-//		case 3:
-//			player.addStat(Achievements.shardt3, 1);
-//			break;
-//		case 4:
-//			player.addStat(Achievements.shardt4, 1);
-//			break;
-//		case 5:
-//			player.addStat(Achievements.shardt5, 1);
-//			break;
-//		default:
-//			break;
-//		}
-//	}
+	// public static void checkForAchievements(EntityPlayer player, ItemStack
+	// shard) {
+	// int tier = (int) getShardTier(shard);
+	// switch (tier) {
+	// case 0:
+	// break;
+	// case 1:
+	// player.addStat(Achievements.shardt1, 1);
+	// break;
+	// case 2:
+	// player.addStat(Achievements.shardt2, 1);
+	// break;
+	// case 3:
+	// player.addStat(Achievements.shardt3, 1);
+	// break;
+	// case 4:
+	// player.addStat(Achievements.shardt4, 1);
+	// break;
+	// case 5:
+	// player.addStat(Achievements.shardt5, 1);
+	// break;
+	// default:
+	// break;
+	// }
+	// }
 
 	public static short getShardKillCount(ItemStack shard) {
 		if (!shard.hasTagCompound()) {
@@ -141,8 +142,7 @@ public final class Utils {
 			return 0;
 		}
 
-		return (byte) MathHelper.clamp_int(
-				shard.stackTagCompound.getByte("Tier"), 0, 5);
+		return (byte) MathHelper.clamp_int(shard.stackTagCompound.getByte("Tier"), 0, 5);
 	}
 
 	public static void setShardTier(ItemStack shard, byte tier) {
@@ -150,8 +150,7 @@ public final class Utils {
 			shard.setTagCompound(new NBTTagCompound());
 		}
 
-		shard.stackTagCompound.setByte("Tier",
-				(byte) MathHelper.clamp_int(tier, 0, 5));
+		shard.stackTagCompound.setByte("Tier", (byte) MathHelper.clamp_int(tier, 0, 5));
 	}
 
 	/*
@@ -286,5 +285,29 @@ public final class Utils {
 		} else {
 			return null;
 		}
+	}
+
+	public static void setShardBoundPlayer(ItemStack shard, EntityPlayer player) {
+		shard.stackTagCompound.setString("owner", player.getDisplayName());
+	}
+
+	public static String getShardBoundPlayer(ItemStack shard) {
+		if (!shard.hasTagCompound()) {
+			return null;
+		}
+
+		if (shard.stackTagCompound.hasKey("owner")) {
+			return shard.stackTagCompound.getString("owner");
+		}
+
+		return null;
+	}
+	
+	public static String localize(String key) {
+		return StatCollector.translateToLocal(key);
+	}
+	
+	public static String localizeFormatted(String key, String keyFormat) {
+		return String.format(localize(key), localize(keyFormat));
 	}
 }

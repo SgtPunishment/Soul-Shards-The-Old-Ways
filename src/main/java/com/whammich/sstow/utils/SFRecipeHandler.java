@@ -44,7 +44,7 @@ public class SFRecipeHandler {
 		this.addFuel(new ItemStack(Register.ItemMaterials, 1, 4), 1);
 
 		// Items		
-		if (!Config.EASYMODE){
+		if (!Config.RITUAL){
 			addRecipe(new ItemStack(Items.diamond), new ItemStack(Register.ItemShardSoul, Config.SHARDS), null, 8, 12600, 1F);
 		}
 		addRecipe(new ItemStack(Items.wheat_seeds), new ItemStack(Items.nether_wart), null, 1, 1200, 0.5F);
