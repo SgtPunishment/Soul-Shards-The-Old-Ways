@@ -176,15 +176,15 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 		}
 
 		if (((Config.MODULE_PLAYER == false) && (TierHandler.getChecksPlayer(tier - 1))
-				&& (!isPlayerClose(this.xCoord, this.yCoord, this.zCoord))) || ((Config.MODULE_PLAYER == true) && (!isPlayerClose(this.xCoord, this.yCoord, this.zCoord)) && (modules[2] != null))) {
+				&& (!isPlayerClose(this.xCoord, this.yCoord, this.zCoord))) || ((Config.MODULE_PLAYER == true) && (!isPlayerClose(this.xCoord, this.yCoord, this.zCoord)) && (modules[2] == null))) {
 			return false;
 		}
 
-		if (((Config.MODULE_LIGHT == false) && (TierHandler.getChecksLight(tier - 1)) && (!canSpawnInLight(ent))) || ((Config.MODULE_LIGHT == true) && (!canSpawnInLight(ent)) && (modules[3] != null))) {
+		if (((Config.MODULE_LIGHT == false) && (TierHandler.getChecksLight(tier - 1)) && (!canSpawnInLight(ent))) || ((Config.MODULE_LIGHT == true) && (!canSpawnInLight(ent)) && (modules[3] == null))) {
 			return false;
 		}
 
-		if (((Config.MODULE_DIM == false) && (TierHandler.getChecksWorld(tier - 1)) && (!canSpawnInWorld(ent))) || ((Config.MODULE_DIM == true) && (!canSpawnInWorld(ent)) && (modules[4] != null))) {
+		if (((Config.MODULE_DIM == false) && (TierHandler.getChecksWorld(tier - 1)) && (!canSpawnInWorld(ent))) || ((Config.MODULE_DIM == true) && (!canSpawnInWorld(ent)) && (modules[4] == null))) {
 			return false;
 		}
 		return true;
@@ -291,7 +291,10 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
 
-		modules[0] = ItemStack.loadItemStackFromNBT(nbt.getCompoundTag("Shard"));
+		int i;
+		for (i = 0; i <5; ++i) {
+		modules[i] = ItemStack.loadItemStackFromNBT(nbt.getCompoundTag("Slot"+i));
+		}
 		if (modules[0] != null) {
 			tier = Utils.getShardTier(modules[0]);
 			entName = Utils.getShardBoundEnt(modules[0]);
@@ -305,10 +308,13 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 
 	public void writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
-		if (modules[0] != null) {
+		int i;
+		for (i = 0; i <5; ++i) {
+		if (modules[i] != null) {
 			NBTTagCompound tag = new NBTTagCompound();
-			modules[0].writeToNBT(tag);
-			nbt.setTag("Shard", tag);
+			modules[i].writeToNBT(tag);
+			nbt.setTag("Slot"+i, tag);
+		}
 		}
 		if (this.hasCustomInventoryName()) {
 			nbt.setString("CustomName", this.cageName);
@@ -356,10 +362,14 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 			return;
 		} else {
 			this.worldObj.setBlockMetadataWithNotify(this.xCoord, this.yCoord, this.zCoord, 1, 2);
+			if(modules[0] == null){
+			    return;
+			   } else {
 			this.tier = Utils.getShardTier(this.modules[0]);
 			this.entName = Utils.getShardBoundEnt(this.modules[0]);
 			this.owner = Utils.getShardBoundPlayer(modules[0]);
-		}
+			   }
+			}
 	}
 
 	@Override
