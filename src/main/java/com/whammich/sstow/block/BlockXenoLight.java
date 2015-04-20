@@ -1,5 +1,6 @@
 package com.whammich.sstow.block;
 
+import com.whammich.sstow.utils.Reference;
 import com.whammich.sstow.utils.Register;
 
 import net.minecraft.block.Block;
@@ -9,14 +10,15 @@ import net.minecraft.util.IIcon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockSoulium extends Block {
+public class BlockXenoLight extends Block {
 
-	public BlockSoulium() {
-		super(Material.iron);
-		this.setBlockName("sstow.block.soulium");
-		this.setCreativeTab(Register.CREATIVE_TAB);
-		this.blockHardness = 3.0F;
-		this.blockResistance = 3.0F;
+	public BlockXenoLight() {
+		super(Material.glass);
+		setBlockName("sstow.block.xenolith.light");
+		setCreativeTab(Register.CREATIVE_TAB);
+		blockHardness = 3.0F;
+		blockResistance = 3.0F;
+		setLightLevel(1.0F);
 	}
 
 	@Override
@@ -28,6 +30,6 @@ public class BlockSoulium extends Block {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister iconRegister) {
-		this.blockIcon = iconRegister.registerIcon("sstow:soulium_block");
+		blockIcon = iconRegister.registerIcon(Reference.MOD_ID + ":xenolith/xenolith_glowstone");
 	}
 }

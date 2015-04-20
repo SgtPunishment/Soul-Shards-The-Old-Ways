@@ -11,7 +11,7 @@ import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 
 import com.whammich.sstow.utils.Config;
-import com.whammich.sstow.utils.EntityBlackList;
+import com.whammich.sstow.utils.Entitylist;
 import com.whammich.sstow.utils.EntityMapper;
 import com.whammich.sstow.utils.ModLogger;
 import com.whammich.sstow.utils.Register;
@@ -42,12 +42,12 @@ public class PlayerKillEntityEvent {
 
 		String entName = EntityList.getEntityString(dead);
 		
-		if (EntityBlackList.bList.contains(entName)){
+		if (Entitylist.bList.contains(entName)){
 			return;
 		}
 		
 		if (entName == null || entName.isEmpty()) {
-			ModLogger.logFatal("Player killed entity with no unlocalized name: " + dead);
+			ModLogger.logFatal(Utils.localizeFormatted("chat.sstow.debug.nounlocname", "" + dead));
 			return;
 		}
 
@@ -66,6 +66,7 @@ public class PlayerKillEntityEvent {
 			if (!Utils.isShardBound(shard)) {
 				Utils.setShardBoundEnt(shard, entName);
 				Utils.writeEntityHeldItem(shard, dead);
+				Utils.setShardBoundPlayer(shard, player);
 			}
 			Utils.writeEntityArmor(shard, dead);
 

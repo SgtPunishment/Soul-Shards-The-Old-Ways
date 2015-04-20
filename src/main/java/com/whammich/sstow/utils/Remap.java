@@ -15,7 +15,7 @@ public class Remap {
 
 	};
 
-	public static Item[] newItemNames = { 
+	public static Item[] newItemNames = {
 		Register.ItemFixedDummy,
 		Register.ItemSwordSoul, 
 		Register.ItemPickaxeSoul,
@@ -26,16 +26,12 @@ public class Remap {
 		
 	};;
 
-	public static String[] oldBlockNames = { 
-		//"sstow_forge",
-		"sstow_soulium_block",
+	public static String[] oldBlockNames = {
 		"sstow_soul_cage"
 		
 	};
 
-	public static Block[] newBlockNames = { 
-		//Register.BlockForge,
-		Register.BlockSoulium, 
+	public static Block[] newBlockNames = {
 		Register.BlockCage
 		
 	};

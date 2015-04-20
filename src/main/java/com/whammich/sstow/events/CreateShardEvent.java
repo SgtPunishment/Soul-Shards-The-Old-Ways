@@ -1,8 +1,5 @@
 package com.whammich.sstow.events;
 
-import com.whammich.sstow.utils.Config;
-import com.whammich.sstow.utils.Register;
-
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -10,6 +7,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+
+import com.whammich.sstow.utils.Config;
+import com.whammich.sstow.utils.Register;
+
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class CreateShardEvent {
@@ -18,13 +19,11 @@ public class CreateShardEvent {
 	public void onRightClick(PlayerInteractEvent event) {
 		if (Config.RITUAL == true) {
 
-			if (event.world.isRemote
-					|| event.action != PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK) {
+			if (event.world.isRemote || event.action != PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK) {
 				return;
 			}
 
-			if (event.entityPlayer.getHeldItem() == null
-					|| event.entityPlayer.getHeldItem().getItem() != Items.diamond) {
+			if (event.entityPlayer.getHeldItem() == null || event.entityPlayer.getHeldItem().getItem() != Items.diamond) {
 				return;
 			}
 
@@ -32,8 +31,7 @@ public class CreateShardEvent {
 				return;
 			}
 
-			if (checkHorizontal(event.world, event.x, event.y, event.z)
-					|| checkVertical(event.world, event.x, event.y, event.z)) {
+			if (checkHorizontal(event.world, event.x, event.y, event.z) || checkVertical(event.world, event.x, event.y, event.z)) {
 				if (!event.entityPlayer.capabilities.isCreativeMode) {
 					event.entityPlayer.getHeldItem().stackSize--;
 				}
@@ -42,6 +40,11 @@ public class CreateShardEvent {
 
 				ForgeDirection dir = ForgeDirection.getOrientation(event.face);
 
+//				event.entityPlayer.addChatComponentMessage(new ChatComponentText((char) 167 + "5" + (char) 167 + "o" + Utils.localize("chat.sstow.ritual.creep1")));
+//				event.entityPlayer.addChatComponentMessage(new ChatComponentText((char) 167 + "5" + (char) 167 + "o" + Utils.localize("chat.sstow.ritual.creep2")));
+//				event.world.playSoundEffect(event.x, event.y, event.z, "portal.trigger", 0.1F, 1.0F);
+//				event.world.addWeatherEffect(new EntityHarmlessLightningBolt(event.world, event.x, event.y, event.z));
+				
 				event.world.spawnEntityInWorld(new EntityItem(event.world,
 						event.x + (dir.offsetX * 1.75D), event.y
 								+ (dir.offsetY * 1.75D) + 0.5D, event.z
