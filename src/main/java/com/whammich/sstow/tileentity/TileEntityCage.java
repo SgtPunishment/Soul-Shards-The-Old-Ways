@@ -36,7 +36,7 @@ import com.whammich.sstow.utils.EntityBlackList;
 public class TileEntityCage extends TileEntity implements ISidedInventory {
 
 	private ItemStack[] modules = new ItemStack[5];
-	private ItemStack inventory;
+	//private ItemStack inventory;
 	private int counter;
 	private int updateCounter;
 	private int tier;
@@ -176,15 +176,18 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 		}
 
 		if (((Config.MODULE_PLAYER == false) && (TierHandler.getChecksPlayer(tier - 1))
-				&& (!isPlayerClose(this.xCoord, this.yCoord, this.zCoord))) || ((Config.MODULE_PLAYER == true) && (!isPlayerClose(this.xCoord, this.yCoord, this.zCoord)) && (modules[2] != null))) {
+				&& (!isPlayerClose(this.xCoord, this.yCoord, this.zCoord))) || ((Config.MODULE_PLAYER == true) 
+						&& (!isPlayerClose(this.xCoord, this.yCoord, this.zCoord)) && (modules[2] == null))) {
 			return false;
 		}
 
-		if (((Config.MODULE_LIGHT == false) && (TierHandler.getChecksLight(tier - 1)) && (!canSpawnInLight(ent))) || ((Config.MODULE_LIGHT == true) && (!canSpawnInLight(ent)) && (modules[3] != null))) {
+		if (((Config.MODULE_LIGHT == false) && (TierHandler.getChecksLight(tier - 1)) &&
+				(!canSpawnInLight(ent))) || ((Config.MODULE_LIGHT == true) && (!canSpawnInLight(ent)) && (modules[3] == null))) {
 			return false;
 		}
 
-		if (((Config.MODULE_DIM == false) && (TierHandler.getChecksWorld(tier - 1)) && (!canSpawnInWorld(ent))) || ((Config.MODULE_DIM == true) && (!canSpawnInWorld(ent)) && (modules[4] != null))) {
+		if (((Config.MODULE_DIM == false) && (TierHandler.getChecksWorld(tier - 1)) && 
+				(!canSpawnInWorld(ent))) || ((Config.MODULE_DIM == true) && (!canSpawnInWorld(ent)) && (modules[4] == null))) {
 			return false;
 		}
 		return true;
@@ -291,7 +294,10 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
 
-		modules[0] = ItemStack.loadItemStackFromNBT(nbt.getCompoundTag("Shard"));
+		int i;
+		for (i = 0; i <5; ++i) {
+			modules[i] = ItemStack.loadItemStackFromNBT(nbt.getCompoundTag("Slot"+i));
+		}
 		if (modules[0] != null) {
 			tier = Utils.getShardTier(modules[0]);
 			entName = Utils.getShardBoundEnt(modules[0]);
@@ -305,10 +311,13 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 
 	public void writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
-		if (modules[0] != null) {
-			NBTTagCompound tag = new NBTTagCompound();
-			modules[0].writeToNBT(tag);
-			nbt.setTag("Shard", tag);
+		int i;
+		for (i = 0; i <5; ++i) {
+			if (modules[i] != null) {
+				NBTTagCompound tag = new NBTTagCompound();
+				modules[i].writeToNBT(tag);
+				nbt.setTag("Slot"+i, tag);
+			}
 		}
 		if (this.hasCustomInventoryName()) {
 			nbt.setString("CustomName", this.cageName);
@@ -352,7 +361,7 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 
 	public void setInventorySlotContents(int slot, ItemStack stack) {
 		this.modules[slot] = stack;
-		if(this.modules[slot] == null) {
+		if(this.modules[0] == null) {
 			return;
 		} else {
 			this.worldObj.setBlockMetadataWithNotify(this.xCoord, this.yCoord, this.zCoord, 1, 2);
