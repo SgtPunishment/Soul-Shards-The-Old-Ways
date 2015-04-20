@@ -59,6 +59,7 @@ public class SFRecipeHandler {
 		addRecipe(new ItemStack(Blocks.log, 1, 3), new ItemStack(Register.BlockPetrified, 1, 3), null, 1, 1600, 2F);
 		addRecipe(new ItemStack(Blocks.log2, 1, 0), new ItemStack(Register.BlockPetrified2, 1, 0), null, 1, 1600, 2F);
 		addRecipe(new ItemStack(Blocks.log2, 1, 1), new ItemStack(Register.BlockPetrified2, 1, 1), null, 1, 1600, 2F);
+		addRecipe(new ItemStack(Blocks.obsidian, 1), new ItemStack(Register.BlockObsidianGlass, 1), null, 10, 23000, 5F);
 	}
 
 	public void addRecipe(ItemStack input, ItemStack output,

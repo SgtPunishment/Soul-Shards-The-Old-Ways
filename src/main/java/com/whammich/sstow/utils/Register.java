@@ -15,6 +15,7 @@ import net.minecraftforge.oredict.ShapelessOreRecipe;
 import com.whammich.sstow.SSTheOldWays;
 import com.whammich.sstow.block.BlockCage;
 import com.whammich.sstow.block.BlockForge;
+import com.whammich.sstow.block.BlockGlassObsidian;
 import com.whammich.sstow.block.BlockMaterials;
 import com.whammich.sstow.block.BlockPetrified;
 import com.whammich.sstow.block.BlockPetrified2;
@@ -41,7 +42,12 @@ import com.whammich.sstow.item.ItemPickaxeSoul;
 import com.whammich.sstow.item.ItemShardSoul;
 import com.whammich.sstow.item.ItemSpadeSoul;
 import com.whammich.sstow.item.ItemSwordSoul;
-import com.whammich.sstow.item.ItemfixedAchievement;
+import com.whammich.sstow.item.blocks.ItemBlockForge;
+import com.whammich.sstow.item.blocks.ItemBlockMaterials;
+import com.whammich.sstow.item.blocks.ItemBlockPetrified;
+import com.whammich.sstow.item.blocks.ItemBlockPetrified2;
+import com.whammich.sstow.item.blocks.ItemBlockPlankPetrified;
+import com.whammich.sstow.item.blocks.ItemBlockXenolith;
 import com.whammich.sstow.tileentity.TileEntityCage;
 import com.whammich.sstow.tileentity.TileEntityForge;
 
@@ -65,8 +71,14 @@ public class Register {
 	// Set up the mod items
 	public static Item ItemModules = new ItemModules();
 	public static Item ItemMaterials = new ItemMaterials();
-	public static Item ItemFixedDummy = new ItemfixedAchievement();
 	public static Item ItemShardSoul = new ItemShardSoul();
+	public static Item ItemSwordSoul = new ItemSwordSoul(SOULIUM);
+	public static Item ItemPickaxeSoul = new ItemPickaxeSoul(SOULIUM);
+	public static Item ItemAxeSoul = new ItemAxeSoul(SOULIUM);
+	public static Item ItemHoeSoul = new ItemHoeSoul(SOULIUM);
+	public static Item ItemSpadeSoul = new ItemSpadeSoul(SOULIUM);
+
+	// Macu stuff
 	public static Item ItemClubDeco = new ItemClubDeco(ToolMaterial.WOOD);
 	public static Item ItemClubPetr = new ItemClubPetr(ToolMaterial.STONE);
 	public static Item ItemClubIron = new ItemClubIron(ToolMaterial.IRON);
@@ -77,23 +89,18 @@ public class Register {
 	public static Item ItemMacuIron = new ItemMacuIron(MACU2);
 	public static Item ItemMacuSoul = new ItemMacuSoul(MACU3);
 	public static Item ItemMacuXogu = new ItemMacuXogu(MACU3);
-	public static Item ItemSwordSoul = new ItemSwordSoul(SOULIUM);
-	public static Item ItemPickaxeSoul = new ItemPickaxeSoul(SOULIUM);
-	public static Item ItemAxeSoul = new ItemAxeSoul(SOULIUM);
-	public static Item ItemHoeSoul = new ItemHoeSoul(SOULIUM);
-	public static Item ItemSpadeSoul = new ItemSpadeSoul(SOULIUM);
-
+	
 	// Set up the mod blocks
 	public static Block BlockCage = new BlockCage();
 	public static Block BlockForge = new BlockForge(false).setCreativeTab(CREATIVE_TAB);
 	public static Block BlockForgeActive = new BlockForge(true).setBlockName("sstow.forge_block_active");
-	
 	public static Block BlockMaterials = new BlockMaterials();
-	public static Block BlockXenolith = new BlockXenolith();
 	public static Block BlockXenoLight = new BlockXenoLight();
+	public static Block BlockXenolith = new BlockXenolith();
 	public static Block BlockPetrified = new BlockPetrified();
     public static Block BlockPetrified2 = new BlockPetrified2();
     public static Block BlockPetrifiedPlanks = new BlockPlankPetrified();
+    public static Block BlockObsidianGlass = new BlockGlassObsidian();
     
 	public static void registerObjs() {
 		
@@ -131,6 +138,20 @@ public class Register {
 	}
 
 	private static void registerBlocks() {
+		
+		GameRegistry.registerBlock(BlockForge, ItemBlockForge.class, "BlockForge");
+		GameRegistry.registerBlock(BlockForgeActive, BlockForgeActive.getUnlocalizedName());
+		GameRegistry.registerBlock(BlockMaterials, ItemBlockMaterials.class, "BlockMaterials");
+		GameRegistry.registerBlock(BlockXenoLight, "BlockXenoLight");
+		GameRegistry.registerBlock(BlockCage, "sstow_soul_cage");
+		GameRegistry.registerBlock(BlockObsidianGlass, "BlockObsidGlass");
+		GameRegistry.registerBlock(BlockXenolith, ItemBlockXenolith.class, "BlockXenolith");
+		GameRegistry.registerBlock(BlockPetrified, ItemBlockPetrified.class, "BlockPetrifiedLog");
+		GameRegistry.registerBlock(BlockPetrified2, ItemBlockPetrified2.class, "BlockPetrifiedLog2");
+		GameRegistry.registerBlock(BlockPetrifiedPlanks, ItemBlockPlankPetrified.class, "BlockPetrifiedPlanks");
+	}
+
+	private static void registerOreDictEntries() {
 		// Materials
 		OreDictionary.registerOre("nuggetIron", new ItemStack(ItemMaterials, 1, 0));
 		OreDictionary.registerOre("nuggetSoulium", new ItemStack(ItemMaterials, 1, 1));
@@ -171,15 +192,6 @@ public class Register {
 		OreDictionary.registerOre("plankWood", new ItemStack(BlockPetrifiedPlanks, 1, 3));
 		OreDictionary.registerOre("plankWood", new ItemStack(BlockPetrifiedPlanks, 1, 4));
 		OreDictionary.registerOre("plankWood", new ItemStack(BlockPetrifiedPlanks, 1, 5));
-	}
-
-	private static void registerOreDictEntries() {
-		OreDictionary.registerOre("nuggetIron", new ItemStack(ItemMaterials, 1, 0));
-		OreDictionary.registerOre("nuggetSoulium", new ItemStack(ItemMaterials, 1, 1));
-		OreDictionary.registerOre("ingotSoulium", new ItemStack(ItemMaterials, 1, 2));
-		OreDictionary.registerOre("dustVile", new ItemStack(ItemMaterials, 1, 3));
-		OreDictionary.registerOre("essenceCorrupted", new ItemStack(ItemMaterials, 1, 4));
-		OreDictionary.registerOre("stickPetrified", new ItemStack(ItemMaterials, 1, 5));
 	}
 
 	private static void registerTileEntities() {

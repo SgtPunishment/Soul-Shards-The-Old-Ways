@@ -1,11 +1,9 @@
 package com.whammich.sstow.utils;
 
-import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 
 public class Remap {
 	public static String[] oldItemNames = { 
-		"sstow_fixed", 
 		"sstow_soul_sword",
 		"sstow_soul_pickaxe", 
 		"sstow_soul_axe", 
@@ -16,23 +14,12 @@ public class Remap {
 	};
 
 	public static Item[] newItemNames = {
-		Register.ItemFixedDummy,
 		Register.ItemSwordSoul, 
 		Register.ItemPickaxeSoul,
 		Register.ItemAxeSoul,
 		Register.ItemHoeSoul,
 		Register.ItemSpadeSoul,
 		Register.ItemShardSoul 
-		
-	};;
-
-	public static String[] oldBlockNames = {
-		"sstow_soul_cage"
-		
-	};
-
-	public static Block[] newBlockNames = {
-		Register.BlockCage
 		
 	};
 }
