@@ -56,9 +56,9 @@ import cpw.mods.fml.common.registry.GameRegistry;
 public class Register {
 	// Tool material for the soul tools/sword
 	public static ToolMaterial SOULIUM = EnumHelper.addToolMaterial("SOULIUM", 3, 3122, 12.0F, 6F, 30);
-	public static ToolMaterial MACU1 = EnumHelper.addToolMaterial("MACU1", 3, 10, 14.0F, 6F, 30);
-	public static ToolMaterial MACU2 = EnumHelper.addToolMaterial("MACU2", 3, 20, 15.0F, 6F, 30);
-	public static ToolMaterial MACU3 = EnumHelper.addToolMaterial("MACU3", 3, 40, 16.0F, 6F, 30);
+	public static ToolMaterial MACU1 = EnumHelper.addToolMaterial("MACU1", 3, 10, 12.0F, 5F, 0);
+	public static ToolMaterial MACU2 = EnumHelper.addToolMaterial("MACU2", 3, 20, 12.0F, 6F, 0);
+	public static ToolMaterial MACU3 = EnumHelper.addToolMaterial("MACU3", 3, 40, 12.0F, 7F, 0);
 
 	// Setting up the enchantment details from the config
 	public static Enchantment SOUL_STEALER = new EnchantmentSoulStealer(Config.ENCHANT_ID, Config.ENCHANT_WEIGHT);

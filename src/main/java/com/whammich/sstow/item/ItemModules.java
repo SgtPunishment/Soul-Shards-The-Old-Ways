@@ -16,10 +16,11 @@ import net.minecraft.util.IIcon;
 public class ItemModules extends Item {
     private static String[] names = {
     		"module.redstone",
+    		"module.detection",
     		"module.light",
     		"module.dimension",
     		"module.t5controller",
-    		"module.detection"
+    		
     	};
     private IIcon[] icon = new IIcon[5];
     
@@ -44,10 +45,10 @@ public class ItemModules extends Item {
     @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister iconRegister) {
         this.icon[0] = iconRegister.registerIcon(Reference.MOD_ID + ":moduleRedstone");
-        this.icon[1] = iconRegister.registerIcon(Reference.MOD_ID + ":moduleLight");
-        this.icon[2] = iconRegister.registerIcon(Reference.MOD_ID + ":moduleDimension");
-        this.icon[3] = iconRegister.registerIcon(Reference.MOD_ID + ":moduleController");
-        this.icon[4] = iconRegister.registerIcon(Reference.MOD_ID + ":modulePlayerDetect");
+        this.icon[1] = iconRegister.registerIcon(Reference.MOD_ID + ":modulePlayerDetect");
+        this.icon[2] = iconRegister.registerIcon(Reference.MOD_ID + ":moduleLight");
+        this.icon[3] = iconRegister.registerIcon(Reference.MOD_ID + ":moduleDimension");
+        this.icon[4] = iconRegister.registerIcon(Reference.MOD_ID + ":moduleController");
     }
 
     @SuppressWarnings({"rawtypes", "unchecked"})
