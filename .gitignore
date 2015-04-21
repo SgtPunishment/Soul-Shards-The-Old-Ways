@@ -12,6 +12,8 @@
 /.metadata/
 /.settings/
 /libs/
+/logs/
+/config/
 
 # File Extensions
 *.psd
