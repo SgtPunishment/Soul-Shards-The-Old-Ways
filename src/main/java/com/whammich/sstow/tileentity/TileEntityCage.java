@@ -321,7 +321,7 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 	}
 
 	public int getSizeInventory() {
-		return 0;
+		return 4;
 	}
 
 	public ItemStack getStackInSlot(int slot) {
