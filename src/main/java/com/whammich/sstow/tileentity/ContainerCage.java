@@ -1,5 +1,9 @@
 package com.whammich.sstow.tileentity;
 
+import com.whammich.sstow.guihandler.SlotLocked;
+import com.whammich.sstow.guihandler.SlotModule;
+import com.whammich.sstow.guihandler.SlotShard;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;

@@ -1,4 +1,4 @@
-package com.whammich.sstow.tileentity;
+package com.whammich.sstow.guihandler;
 
 import com.whammich.sstow.utils.Register;
 import net.minecraft.inventory.IInventory;

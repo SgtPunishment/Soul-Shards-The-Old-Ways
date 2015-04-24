@@ -34,7 +34,7 @@ import com.whammich.sstow.utils.Entitylist;
 
 public class TileEntityCage extends TileEntity implements ISidedInventory {
 
-	private ItemStack[] modules = new ItemStack[9];
+	private ItemStack[] modules = new ItemStack[7];
 	private int counter;
 	private int updateCounter;
 	private int tier;

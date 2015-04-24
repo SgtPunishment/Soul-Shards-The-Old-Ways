@@ -8,8 +8,6 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import com.whammich.sstow.tileentity.ContainerCage;
-import com.whammich.sstow.tileentity.SlotLocked;
-import com.whammich.sstow.tileentity.SlotModule;
 import com.whammich.sstow.tileentity.TileEntityCage;
 import com.whammich.sstow.utils.Config;
 import com.whammich.sstow.utils.Reference;

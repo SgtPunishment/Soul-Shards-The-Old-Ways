@@ -1,14 +1,16 @@
-package com.whammich.sstow.tileentity;
+package com.whammich.sstow.guihandler;
 
 import com.whammich.sstow.utils.Register;
+import com.whammich.sstow.utils.Utils;
+
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class SlotModule  extends Slot
+public class SlotShard  extends Slot
 {
 
-    public SlotModule(IInventory parIInventory, int parSlotIndex, 
+    public SlotShard(IInventory parIInventory, int parSlotIndex, 
           int parXDisplayPosition, int parYDisplayPosition)
     {
         super(parIInventory, parSlotIndex, parXDisplayPosition, 
@@ -17,6 +19,9 @@ public class SlotModule  extends Slot
     
     @Override
 	public boolean isItemValid(ItemStack stack) {
-		return (stack.getItem() == Register.ItemModules);
+		return (stack.getItem() == Register.ItemShardSoul
+				  && stack.getItem() == Register.ItemShardSoul 
+				  && Utils.isShardBound(stack) 
+				  && Utils.getShardTier(stack) > 0 );
 	}
 }
