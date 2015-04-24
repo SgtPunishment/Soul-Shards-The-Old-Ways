@@ -8,7 +8,10 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import com.whammich.sstow.tileentity.ContainerCage;
+import com.whammich.sstow.tileentity.SlotLocked;
+import com.whammich.sstow.tileentity.SlotModule;
 import com.whammich.sstow.tileentity.TileEntityCage;
+import com.whammich.sstow.utils.Config;
 import com.whammich.sstow.utils.Reference;
 
 import cpw.mods.fml.relauncher.Side;
@@ -17,7 +20,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class GuiSoulCage extends GuiContainer {
 
-	private static final ResourceLocation CageGuiTexture = new ResourceLocation(Reference.MOD_ID + ":textures/gui/container/cage.png");
+	private static final ResourceLocation CageGuiTexture = new ResourceLocation(Reference.MOD_ID + ":textures/gui/container/cage2.png");
 	private TileEntityCage tileCage;
 
 	public GuiSoulCage(InventoryPlayer invPlayer, TileEntityCage tile) {
@@ -39,6 +42,28 @@ public class GuiSoulCage extends GuiContainer {
 		int k = (this.width - this.xSize) / 2;
 		int l = (this.height - this.ySize) / 2;
 		this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
-//		int i1;
+		int i1;
+		this.drawTexturedModalRect(k+35, l+16, 176, 0,
+				18, 18);
+//		if (Config.Module_CONTROL == false){
+//			this.drawTexturedModalRect(k+152, l+17, 176, 18,
+//					16, 16);
+//		}
+		if (Config.MODULE_RED == false) {
+			this.drawTexturedModalRect(k+70, l+17, 176, 18,
+					16, 16);
+		}
+		if (Config.MODULE_LIGHT == false) {
+			this.drawTexturedModalRect(k+88, l+17, 176, 18,
+					16, 16);
+		}
+		if (Config.MODULE_DIM == false) {
+			this.drawTexturedModalRect(k+106, l+17, 176, 18,
+					16, 16);
+		}
+		if (Config.MODULE_PLAYER == true) {
+			this.drawTexturedModalRect(k+124, l+17, 176, 18,
+					16, 16);
+		}
 	}
 }

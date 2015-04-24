@@ -11,11 +11,13 @@ public class ContainerCage extends Container {
 
 	public ContainerCage(InventoryPlayer player, TileEntityCage TileEntityCage) {
 		this.tileCage = TileEntityCage;
-		this.addSlotToContainer(new Slot(TileEntityCage, 0, 17, 17));
-		this.addSlotToContainer(new Slot(TileEntityCage, 1, 98, 17));
-		this.addSlotToContainer(new Slot(TileEntityCage, 2, 116, 17));
-		this.addSlotToContainer(new Slot(TileEntityCage, 3, 134, 17));
-		this.addSlotToContainer(new Slot(TileEntityCage, 4, 152, 17));
+		this.addSlotToContainer(new SlotShard(TileEntityCage, 0, 17, 17));
+		this.addSlotToContainer(new SlotModule(TileEntityCage, 1, 36, 17));
+		this.addSlotToContainer(new SlotLocked(TileEntityCage, 2, 70, 17));
+		this.addSlotToContainer(new SlotLocked(TileEntityCage, 3, 88, 17));
+		this.addSlotToContainer(new SlotLocked(TileEntityCage, 4, 106, 17));
+		this.addSlotToContainer(new SlotLocked(TileEntityCage, 5, 124, 17));
+		this.addSlotToContainer(new SlotLocked(TileEntityCage, 6, 152, 17));
 
 		int i;
 		for (i = 0; i < 3; ++i) {
@@ -46,12 +48,20 @@ public class ContainerCage extends Container {
                      stack = stackInSlot.copy();
 
                      
-                     if (slot < 4) {
-                             if (!this.mergeItemStack(stackInSlot, 4, 36+4, true)) {
+                     if (slot < 6) {
+                             if (!this.mergeItemStack(stackInSlot, 6, 43, true)) {
                                      return null;
                              }
-                     }
-                     else if (!this.mergeItemStack(stackInSlot, 0, 4, false)) {
+                     } else if (slot >= 6 && slot < 34) {
+     					if (!this.mergeItemStack(stackInSlot, 30, 39, false)) {
+    						return null;
+    					}
+    				} else if (slot >= 34 && slot < 43
+    						
+    						&& !this.mergeItemStack(stackInSlot, 6, 34, false)) {
+    					return null;
+    				}
+                     else if (!this.mergeItemStack(stackInSlot, 6, 43, false)) {
                              return null;
                      }
 

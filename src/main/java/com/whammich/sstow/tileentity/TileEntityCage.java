@@ -34,7 +34,7 @@ import com.whammich.sstow.utils.Entitylist;
 
 public class TileEntityCage extends TileEntity implements ISidedInventory {
 
-	private ItemStack[] modules = new ItemStack[5];
+	private ItemStack[] modules = new ItemStack[9];
 	private int counter;
 	private int updateCounter;
 	private int tier;
@@ -81,7 +81,7 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 			counter = 0;
 			return;
 		}
-
+		
 		if (updateCounter == 19) {
 			EntityLiving ent = EntityMapper.getNewEntityInstance(this.worldObj,
 					entName);
@@ -142,6 +142,17 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 		}
 	}
 
+	private void setModule() {
+	if (modules[1] != null){
+           ItemStack itemstack = modules[1];
+           ItemStack itemstack1 = itemstack.copy();
+           int var3 = itemstack.getItemDamage() + 2;
+           if (modules[var3] != null) {
+        		   this.modules[var3] = itemstack1;
+        		   this.modules[1] = null;}
+           }
+	}
+
 	public void checkRedstone() {
 		if (worldObj.isBlockIndirectlyGettingPowered(this.xCoord, this.yCoord,
 				this.zCoord)) {
@@ -158,6 +169,7 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 					this.zCoord, meta, 2);
 		}
 	}
+	
 
 	private boolean canEntitySpawn(EntityLiving ent) {
 		if ((Config.ENABLE_FLOOD_PREVENTION) && (hasReachedSpawnLimit(ent))) {
@@ -166,13 +178,13 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 
 		if (((Config.MODULE_RED == false) && (TierHandler.getChecksRedstone(tier - 1))
 				&& (redstoneActive == Config.INVERT_REDSTONE)) || 
-				((Config.MODULE_RED == true) && (modules[1] != null) && (redstoneActive == Config.INVERT_REDSTONE))) {
+				((Config.MODULE_RED == true) && (modules[2] != null) && (redstoneActive == Config.INVERT_REDSTONE))) {
 			return false;
 		}
 
 		if (((Config.MODULE_PLAYER == false) && (TierHandler.getChecksPlayer(tier - 1))
 				&& (!isPlayerClose(this.xCoord, this.yCoord, this.zCoord))) || ((Config.MODULE_PLAYER == true) 
-						&& (!isPlayerClose(this.xCoord, this.yCoord, this.zCoord)) && (modules[2] == null))) {
+						&& (!isPlayerClose(this.xCoord, this.yCoord, this.zCoord)) && (modules[5] == null))) {
 			return false;
 		}
 
@@ -290,7 +302,7 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 		super.readFromNBT(nbt);
 
 		int i;
-		for (i = 0; i <5; ++i) {
+		for (i = 0; i <7; ++i) {
 			modules[i] = ItemStack.loadItemStackFromNBT(nbt.getCompoundTag("Slot"+i));
 		}
 		if (modules[0] != null) {
@@ -307,7 +319,7 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 	public void writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
 		int i;
-		for (i = 0; i <5; ++i) {
+		for (i = 0; i <7; ++i) {
 			if (modules[i] != null) {
 				NBTTagCompound tag = new NBTTagCompound();
 				modules[i].writeToNBT(tag);
@@ -321,7 +333,7 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 	}
 
 	public int getSizeInventory() {
-		return 4;
+		return 6;
 	}
 
 	public ItemStack getStackInSlot(int slot) {
@@ -356,6 +368,7 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 
 	public void setInventorySlotContents(int slot, ItemStack stack) {
 		this.modules[slot] = stack;
+		if(this.modules[1] !=null){ this.setModule();}
 		if(this.modules[0] == null) {
 			return;
 		} else {
@@ -449,7 +462,7 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 
 	@Override
 	public boolean canInsertItem(int var1, ItemStack stack, int p_102007_3_) {
-		return this.isItemValidForSlot(var1, stack);
+		return false;
 	}
 
 	@Override
