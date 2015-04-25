@@ -124,10 +124,10 @@ public final class Config {
 			PERSONALSHARD = config.getBoolean("Personal shards", "general", false, "The soulcage will only function if the original shard creator is nearby, not just anyone.");
 
 			// Module Section
-			MODULE_RED = config.getBoolean("Enable Redstone Module", "general", true, "wub wub");
-			MODULE_LIGHT = config.getBoolean("Enable Light Module", "general", true, "wub wub");
-			MODULE_DIM = config.getBoolean("Enable Dimention Moduel", "general", true, "wub wub");
-			MODULE_PLAYER = config.getBoolean("Enable Player Module", "general", false, "wub wub");
+			MODULE_RED = config.getBoolean("Enable Redstone Module", "general", true, "Enable the redstone module?");
+			MODULE_LIGHT = config.getBoolean("Enable Light Module", "general", true, "Enable the light module?");
+			MODULE_DIM = config.getBoolean("Enable Dimention Module", "general", true, "Enable the dimension module?");
+			MODULE_PLAYER = config.getBoolean("Enable Player Module", "general", false, "Enable the player detection module?");
 			
 			// recipes Section
 			// COOK_TIME = config.getInt("Cooking Time", "recipes", 12800, 0, 999999, "Time (In Ticks) it takes to create Soulium and Soul Shards");

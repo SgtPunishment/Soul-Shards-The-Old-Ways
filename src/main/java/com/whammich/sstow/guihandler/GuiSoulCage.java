@@ -40,26 +40,25 @@ public class GuiSoulCage extends GuiContainer {
 		int k = (this.width - this.xSize) / 2;
 		int l = (this.height - this.ySize) / 2;
 		this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
-		int i1;
 		this.drawTexturedModalRect(k+35, l+16, 176, 0,
 				18, 18);
 //		if (Config.Module_CONTROL == false){
 //			this.drawTexturedModalRect(k+152, l+17, 176, 18,
 //					16, 16);
 //		}
-		if (Config.MODULE_RED == false) {
+		if (!Config.MODULE_RED) {
 			this.drawTexturedModalRect(k+70, l+17, 176, 18,
 					16, 16);
 		}
-		if (Config.MODULE_LIGHT == false) {
+		if (!Config.MODULE_LIGHT) {
 			this.drawTexturedModalRect(k+88, l+17, 176, 18,
 					16, 16);
 		}
-		if (Config.MODULE_DIM == false) {
+		if (!Config.MODULE_DIM) {
 			this.drawTexturedModalRect(k+106, l+17, 176, 18,
 					16, 16);
 		}
-		if (Config.MODULE_PLAYER == true) {
+		if (Config.MODULE_PLAYER) {
 			this.drawTexturedModalRect(k+124, l+17, 176, 18,
 					16, 16);
 		}
