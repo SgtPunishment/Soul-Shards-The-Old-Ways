@@ -147,7 +147,7 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
            ItemStack itemstack = modules[1];
            ItemStack itemstack1 = itemstack.copy();
            int var3 = itemstack.getItemDamage() + 2;
-           if (modules[var3] != null) {
+           if (modules[var3] == null) {
         		   this.modules[var3] = itemstack1;
         		   this.modules[1] = null;}
            }
