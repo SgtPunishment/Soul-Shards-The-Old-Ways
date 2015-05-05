@@ -52,7 +52,7 @@ public class SSTheOldWays {
 		Register.registerObjs();
 		SoulManual.registerguide();
 		EntityMapper.init();
-		Entitylist.init(new File(Config.configDirectory + "/entitylist.cfg"));
+		Entitylist.init(new File(Config.configDirectory + "/Soul-Shards-TOW-Entitylist.cfg"));
 	}
 	
 	@EventHandler
